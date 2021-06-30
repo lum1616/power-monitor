@@ -23,7 +23,7 @@ router.get('/info/online',(req, res) => {
 
 router.get('/info/kwhUsed',(req, res) => {
   let dev = req.query.dev
-  let kwhDate = req.query.kwhDate 
+  let kwhDate = req.query.kwhDate  
    
     meter.Usage(dev, kwhDate, function(err, mdl)  {  
       res.render('info/kwhUsed', { dev, kwhDate , mdl})

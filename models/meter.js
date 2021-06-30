@@ -40,7 +40,10 @@ function Usage (dev, kwhDate,  callback)
                     callback(err,null)}
                 else {
                        if (result.length > 0 ){                                                                     
-                        m.push({ date : result[0].date.toLocaleDateString("en-US"),
+                        m.push({ date : result[0].date.toLocaleDateString("en-GB", { 
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",}) ,
                             
                             kwh : result[0].kwh})
                        }

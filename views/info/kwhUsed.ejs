@@ -1,23 +1,29 @@
- 
+<style>
+    td {
+    text-align: right;
+    }
+
+    th {
+        text-align: center;
+    }
+</style> 
 
 <div id='pdf' >
-    <h5 ><%- `kwh Usage for ${dev}`  %>   </h5> 
+    <h4 ><%- `kwh Usage for ${dev}`  %>   </h4> 
 </div>
 
     <table class="table table-bordered table-responsive table-hover">
         <tr>
             <th>Date</th>
             <th>KWH</th>
-        
         </tr>
 
-        <%for(var i =0; i< mdl.length; i++  ){%> 
-            <tr>
-                <td><%-mdl[i].date%> </td>
-                <td><%-mdl[i].kwh%></td>
-            
+        <% for(var i =0; i< mdl.length; i++  ){%> 
+             <tr>
+                <td><%-mdl[i].date%></td>
+                <td><%-mdl[i].kwh%></td>                         
             </tr>
-         <%}  %> 
+         <% } %> 
     </table>
 </div>
 
@@ -30,4 +36,4 @@
     </form>   
 </div>
 
-<script>
+

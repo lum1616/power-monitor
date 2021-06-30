@@ -9,12 +9,21 @@ table {
 table, th, td {
   border: 1px solid black;
 }
+
+td {
+text-align: right;
+}
+
+th {
+    text-align: center;
+}
+
 </style>
 </head>
 <body>
 <div style="width: 85%; margin: 0 7.5%;">
 	<div style=" padding-left: 50px;">
-	<h1><%- `kwh Usage for ${dev}` %></h1> 
+	<h3><%- `kwh Usage for ${dev}` %></h3> 
 	
 	<table >
 		<tr>
