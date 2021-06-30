@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+<div style="width: 85%; margin: 0 7.5%;">
+	<div style=" padding-left: 50px;">
+	<h1><%- `kwh Usage for ${dev}` %></h1> 
+	
+	<table >
+		<tr>
+            <th>Date</th>
+            <th>KWH</th>
+        
+        </tr>
+
+        <% for(var i =0; i< mdl.length; i++){ %> 
+            <tr>
+                <td><%- mdl[i].date %> </td>
+                <td><%- mdl[i].kwh %></td>
+            
+            </tr>
+         <% } %> 
+	</table>	
+
+	</div>
+</div>
+</body>
+</html>

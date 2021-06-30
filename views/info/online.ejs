@@ -1,0 +1,25 @@
+<br>
+<head>
+    <meta http-equiv="refresh" content="" />
+</head>
+<table class="table table-striped table-bordered table-hover table-condensed">
+
+    <tr>
+        <th>Location</th>
+        <th>Ampere</th>
+        <th>Voltage</th>
+        <th>PF</th>
+        <th>KWH</th>
+    </tr>
+
+    <%for( var i =0; i< meters.length; i++ ){%> 
+        <tr>
+            <td><%-meters[i].name %></td>
+            <td><%-meters[i].amp %></td>
+            <td><%-meters[i].volt %></td>
+            <td><%-meters[i].pf %></td>
+            <td><%-meters[i].kwh %></td> 
+        </tr>
+     <% } %> 
+
+</table>

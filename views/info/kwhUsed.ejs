@@ -1,0 +1,33 @@
+ 
+
+<div id='pdf' >
+    <h5 ><%- `kwh Usage for ${dev}`  %>   </h5> 
+</div>
+
+    <table class="table table-bordered table-responsive table-hover">
+        <tr>
+            <th>Date</th>
+            <th>KWH</th>
+        
+        </tr>
+
+        <%for(var i =0; i< mdl.length; i++  ){%> 
+            <tr>
+                <td><%-mdl[i].date%> </td>
+                <td><%-mdl[i].kwh%></td>
+            
+            </tr>
+         <%}  %> 
+    </table>
+</div>
+
+
+<div>
+    <form action="/public/js" method="get">
+        <input type="hidden" name="dev"  value=<%-`${dev}`  %>>
+        <input type="hidden" name="date"  value=<%-`${mdl[0].date}`  %>>
+        <button type="submit" class="btn btn-primary">Print</button>
+    </form>   
+</div>
+
+<script>

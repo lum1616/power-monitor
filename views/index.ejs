@@ -1,0 +1,24 @@
+<div class="container">
+    <h2>KWH Usage</h2>
+    <p></p>
+    <form action="/info/kwhUsed">
+        <div class="form-group">
+            <label for="usr">Location:</label>
+            <select class="form-control" id="sel1" name="dev" >
+                <option>MSB1</option>
+                <option>MSB2</option>
+                <option>MSB3</option>
+                <option>MSB4</option>
+            </select>
+        </div>
+        
+        <% var d = new Date()%>
+        <% var d1 = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) +"-"+("0" + d.getDate()).slice(-2)%>
+      
+        <div class="form-group">
+            <label for="pwd">Date:</label>            
+            <input type="date" class="form-control" id="date" name="kwhDate"  value=<%-`'${d1}'`  %>>
+        </div>     
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
