@@ -1,18 +1,11 @@
 <style>
-    td {
-    text-align: right;
-    }
-
-    th {
-        text-align: center;
-    }
 </style> 
 
 <div id='pdf' >
     <h4 ><%- `kwh Usage for ${dev}`  %>   </h4> 
 </div>
 
-    <table class="table table-bordered table-responsive table-hover">
+    <table>
         <tr>
             <th>Date</th>
             <th>KWH</th>
@@ -27,12 +20,11 @@
     </table>
 </div>
 
-
-<div>
+<div id="div_bt">
     <form action="/public/js" method="get">
         <input type="hidden" name="dev"  value=<%-`${dev}`  %>>
         <input type="hidden" name="date"  value=<%-`${mdl[0].date}`  %>>
-        <button type="submit" class="btn btn-primary">Print</button>
+        <button type="submit" class="btn-primary">Print</button>
     </form>   
 </div>
 

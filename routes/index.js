@@ -42,7 +42,7 @@ router.get('/public/js',(req, res) => {
   kwhDate = kwhDate.substring((kwhDate.length-4),kwhDate.length)
 
   meter.Usage(dev, kwhDate, function(err, mdl){                          
-      ejs.renderFile(path.join(__dirname, "template.ejs"), {
+      ejs.renderFile(path.join(__dirname, "../views/template.ejs"), {
           mdl, dev }, (err, data) => {
                           if (err) {
                               res.send(err);
@@ -67,7 +67,7 @@ router.get('/public/js',(req, res) => {
                                               if(error){
                                                       res.json({'status':'error',msg:err});
                                               }else{
-                                                      res.writeHead(200, {"Content-Type": "application/pdf"});
+                                                      res.writeHead(200, {"Content-Type": "application/pdf"  });
                                                       res.write(data);
                                                       res.end();       
                                                }

@@ -35,6 +35,9 @@
 }
 
 .btn-primary {
+  border-radius: .5rem;
+  padding: .5rem 1rem;
+  font-size: 1.2rem;
   color: var(--color-btn-primary-text);
   background-color: var(--color-btn-primary-background);
 }
@@ -53,3 +56,9 @@
   color: var(--color-btn-danger-text-dark);
   background-color: var(--color-btn-danger-background-dark);
 }
+
+#div_bt{
+   margin-top: 1rem;
+   padding:  0 40px;
+}
+
