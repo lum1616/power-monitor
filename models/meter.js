@@ -6,14 +6,12 @@ const  mt  = require('../routes');
 const path = require("path");
 const fs = require('fs')
 const ini = require('ini')
+const bcrypt = require ('bcrypt');
+
+global.curUser = {Role : "user", Login : "false" }
 
 
-
-
-//let meter = { date : "date", time : "time", kwh : "kwh", devName : "devName", }
-//let meters = []
-
-var con = Mysql.createConnection({
+  var con = Mysql.createConnection({
     host: "localhost",
     user: "root",
     database: "powermeter",
@@ -101,15 +99,70 @@ function getMeter (callback)
           
     }
     
-
-
-
-    
-                      
-
 }
+
+    function Register (email,password){
+
+      const saltRounds = 5;
+
+      // salt is random number
+      // generate hash
+      bcrypt.hash(password, saltRounds, function(err, hash) {
+          // Store hash in database here
+          let sqlCmd = 
+              "INSERT INTO users (Name, Email, Password, Role) VALUES ("+ `"","${email}","${hash}",""` + ");";
+          con.query(sqlCmd , (err, result)=>{
+                  if (err){ 
+                       console.log('error in sql cmd')
+                      }
+                  else {
+                    console.log('registered');           
+                   } 
+              }
+          ) 
+  
+      });
+    }
+
+
+    function Login (email,password){
+
+      console.log(curUser)
+
+       let sqlCmd = "SELECT * from users where Email = "+ `"${email}"` + " limit 1;" 
+       con.query(sqlCmd , (err, result,fields) => {
+          if (err){ 
+               console.log('login error')
+              }
+          else {
+                console.log(result[0].Email)
+
+                bcrypt.compare(password, result[0].Password, function(err, result) {
+                  if (result) {
+                    console.log("It matches!")
+                    curUser.Login = "true"                  
+                  }
+                  else {
+                    console.log("Invalid password!");
+                  }
+                });
+                
+
+
+
+
+             } 
+        })  
+    
+    }
+
+
+
+
+
+
 
 
 
 // module.exports = {Usage,meter,meters}
- module.exports = {Usage, getMeter}
+ module.exports = {Usage, getMeter, Register, Login, curUser}

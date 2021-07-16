@@ -6,10 +6,18 @@ const pdf = require("html-pdf");
 const path = require("path");
 const fs =require('fs')
 const ini = require('ini')
+const authen = require('../models/authen');
 
 
 router.get('/',(req, res) => {
-  res.render('index')
+  if (meter.curUser.Login === "true"){
+    res.render('index')   
+  }else{
+    res.render('./authen/login')
+
+  }
+
+  
 })
 
 router.get('/info/online',(req, res) => {
@@ -80,6 +88,40 @@ router.get('/public/js',(req, res) => {
   })
 
 })
+
+
+router.get('/authen/login',(req, res) => {
+  res.render('./authen/login')
+})
+
+router.get('/authen/logout',(req, res) => {
+  meter.curUser.Login = "false"
+  res.redirect('./login')
+})
+
+
+
+
+router.get('/authen/register',(req, res) => {
+  res.render('./authen/register')
+})
+
+router.post('/register',(req,res) =>{
+
+   meter.Register(req.body.username, req.body.password);
+   res.redirect('/');
+
+
+})
+
+router.post('/login',(req,res) =>{
+
+  meter.Login(req.body.username, req.body.password);
+   res.redirect('/');
+
+
+})
+
 
 
 
