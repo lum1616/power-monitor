@@ -17,6 +17,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5rem;
+  border: 0.2rem;
+  border-color: aliceblue;
 }
 
 .header-nav ul {

@@ -95,37 +95,44 @@ router.get('/authen/login',(req, res) => {
 })
 
 router.get('/authen/logout',(req, res) => {
-  meter.curUser.Login = "false"
+  meter.curUser.Login = ""
+  curUser.Role = ""
   res.redirect('./login')
 })
 
 
-
-
 router.get('/authen/register',(req, res) => {
-  res.render('./authen/register')
+  
+  if (meter.curUser.Role==="admin"){
+    res.render('./authen/register')
+  }else{
+    res.redirect('/');
+   }
+
 })
 
 router.post('/register',(req,res) =>{
-
-   meter.Register(req.body.username, req.body.password);
-   res.redirect('/');
-
-
-})
-
-router.post('/login',(req,res) =>{
-
-  meter.Login(req.body.username, req.body.password);
-   res.redirect('/');
+ 
+     meter.Register(req.body.username, req.body.password, req.body.role);
+     res.render('index');
+  
 
 
 })
 
 
 
+router.post('/login', async (req,res) =>{
+  
+    try {
+      await meter.Login(req.body.username, req.body.password);        
+      res.redirect('/');          
+    }
+     catch (error) {
+      res.redirect('/');      
+    }  
 
-
+})
 
 module.exports = router
 

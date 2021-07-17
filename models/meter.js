@@ -101,7 +101,7 @@ function getMeter (callback)
     
 }
 
-    function Register (email,password){
+    function Register (email,password,role){
 
       const saltRounds = 5;
 
@@ -110,7 +110,8 @@ function getMeter (callback)
       bcrypt.hash(password, saltRounds, function(err, hash) {
           // Store hash in database here
           let sqlCmd = 
-              "INSERT INTO users (Name, Email, Password, Role) VALUES ("+ `"","${email}","${hash}",""` + ");";
+              "INSERT INTO users (Name, Email, Password, Role) VALUES ("+ `"","${email}","${hash}","${role}"` + ");";
+          //console.log(sqlCmd)    
           con.query(sqlCmd , (err, result)=>{
                   if (err){ 
                        console.log('error in sql cmd')
@@ -122,38 +123,38 @@ function getMeter (callback)
           ) 
   
       });
-    }
+    }   
 
-
-    function Login (email,password){
-
-      console.log(curUser)
-
-       let sqlCmd = "SELECT * from users where Email = "+ `"${email}"` + " limit 1;" 
-       con.query(sqlCmd , (err, result,fields) => {
-          if (err){ 
-               console.log('login error')
-              }
-          else {
-                console.log(result[0].Email)
-
-                bcrypt.compare(password, result[0].Password, function(err, result) {
-                  if (result) {
-                    console.log("It matches!")
-                    curUser.Login = "true"                  
-                  }
-                  else {
-                    console.log("Invalid password!");
-                  }
-                });
-                
-
-
-
-
-             } 
-        })  
+   function Login (email,password){
     
+       let sqlCmd = "SELECT * from users where Email = "+ `"${email}"` + " limit 1;"        
+
+       return new Promise ((resolve,reject) => {    
+
+                    con.query(sqlCmd , (err, result,) => {
+                      if (err){ 
+                          console.log(err) 
+                          return reject(err)            
+                          }
+                      else {
+                        bcrypt.compare(password, result[0].Password, function(err, status) {
+                          if (status) {
+                            console.log("It matches!")
+                            curUser.Login = "true"
+                            curUser.Role = result[0].Role
+                            return resolve(status)
+                          }
+                          else {
+                            console.log("Invalid password!");
+                            return reject(err)
+                          }
+                        });
+                            }
+                    })
+
+      })   
+       
+      
     }
 
 
